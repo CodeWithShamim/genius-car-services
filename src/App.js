@@ -6,6 +6,7 @@ import Footer from "./Pages/Shared/Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NotFound from "./Pages/Shared/NotFound";
 import ServiceDetail from "./Pages/ServiceDetail/ServiceDetail";
+import LoginForm from "./Pages/Login/LoginForm/LoginForm";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           path="service/:serviceId"
           element={<ServiceDetail></ServiceDetail>}
         ></Route>
+        <Route path="/login" element={<LoginForm></LoginForm>}></Route>
         <Route path="*" element={<NotFound></NotFound>}></Route>
       </Routes>
       <Footer></Footer>
