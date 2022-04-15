@@ -12,7 +12,12 @@ const RegisterForm = () => {
   //   -----------------------------------------
   const handleRegister = (e) => {
     e.preventDefault();
-    // console.log(email, password);
+
+    const name = e.target.name.value;
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    const confirmPassword = e.target.confirmPassword.value;
+    console.log(name, email, password, confirmPassword);
   };
 
   return (
@@ -33,6 +38,7 @@ const RegisterForm = () => {
               </label>
               <input
                 type="text"
+                name="name"
                 className="form-control"
                 id="exampleInputText"
                 aria-describedby="textHelp"
@@ -48,6 +54,7 @@ const RegisterForm = () => {
               </label>
               <input
                 type="email"
+                name="email"
                 className="form-control"
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
@@ -59,6 +66,7 @@ const RegisterForm = () => {
                 Password
               </label>
               <input
+                name="password"
                 type="password"
                 class="form-control"
                 id="exampleInputPassword1"
@@ -70,6 +78,7 @@ const RegisterForm = () => {
                 Confirm Password
               </label>
               <input
+                name="confirmPassword"
                 type="password"
                 class="form-control"
                 id="exampleInputConfirm-password"
