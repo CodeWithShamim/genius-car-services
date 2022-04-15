@@ -7,6 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import NotFound from "./Pages/Shared/NotFound";
 import ServiceDetail from "./Pages/ServiceDetail/ServiceDetail";
 import LoginForm from "./Pages/Login/LoginForm/LoginForm";
+import RegisterForm from "./Pages/Login/RegisterForm/RegisterForm";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           element={<ServiceDetail></ServiceDetail>}
         ></Route>
         <Route path="/login" element={<LoginForm></LoginForm>}></Route>
+        <Route path="/signup" element={<RegisterForm></RegisterForm>}></Route>
         <Route path="*" element={<NotFound></NotFound>}></Route>
       </Routes>
       <Footer></Footer>
