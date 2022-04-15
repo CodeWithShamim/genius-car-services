@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../../images/logo.png";
 // import google from "../../images/google.png";
@@ -7,10 +8,15 @@ import logo from "../../../images/logo.png";
 import "./LoginForm.css";
 
 const LoginForm = () => {
+  const emailRef = useRef();
+  const passwordRef = useRef();
   //   -----------------------------------------
   const handleLogin = (e) => {
     e.preventDefault();
-    // console.log(email, password);
+
+    const email = emailRef.current.value;
+    const password = passwordRef.current.value;
+    console.log(email, password);
   };
 
   return (
@@ -30,6 +36,7 @@ const LoginForm = () => {
                 Email
               </label>
               <input
+                ref={emailRef}
                 type="email"
                 className="form-control"
                 id="exampleInputEmail1"
@@ -44,6 +51,7 @@ const LoginForm = () => {
                 Password
               </label>
               <input
+                ref={passwordRef}
                 type="password"
                 class="form-control"
                 id="exampleInputPassword1"
