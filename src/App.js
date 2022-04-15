@@ -8,6 +8,8 @@ import NotFound from "./Pages/Shared/NotFound";
 import ServiceDetail from "./Pages/ServiceDetail/ServiceDetail";
 import LoginForm from "./Pages/Login/LoginForm/LoginForm";
 import RegisterForm from "./Pages/Login/RegisterForm/RegisterForm";
+import CheckOut from "./Pages/CheckOut/CheckOut";
+import RequirAuth from "./Pages/Login/RequirAuth/RequirAuth";
 
 function App() {
   return (
@@ -22,6 +24,14 @@ function App() {
         ></Route>
         <Route path="/login" element={<LoginForm></LoginForm>}></Route>
         <Route path="/signup" element={<RegisterForm></RegisterForm>}></Route>
+        <Route
+          path="/checkout"
+          element={
+            <RequirAuth>
+              <CheckOut></CheckOut>
+            </RequirAuth>
+          }
+        ></Route>
         <Route path="*" element={<NotFound></NotFound>}></Route>
       </Routes>
       <Footer></Footer>

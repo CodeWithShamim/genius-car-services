@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const ServiceDetail = () => {
   const { serviceId } = useParams();
@@ -6,6 +6,9 @@ const ServiceDetail = () => {
   return (
     <div>
       <h1>Service Detail Id: {serviceId}</h1>
+      <Link to="/checkout" className="btn btn-primary">
+        Check Out
+      </Link>
     </div>
   );
 };

@@ -49,9 +49,11 @@ const Header = () => {
             <Nav>
               <Nav.Link href="#deets">Contact</Nav.Link>
               {user?.uid ? (
-                <Nav.Link onClick={logOut}>Logout</Nav.Link>
+                <Nav.Link onClick={logOut} className="text-light fw-bold">
+                  Logout
+                </Nav.Link>
               ) : (
-                <Nav.Link as={Link} to="/login">
+                <Nav.Link as={Link} to="/login" className="text-light fw-bold">
                   Login
                 </Nav.Link>
               )}
