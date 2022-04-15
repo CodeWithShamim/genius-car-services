@@ -1,5 +1,7 @@
 import { useRef } from "react";
-import { Link } from "react-router-dom";
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { Link, useNavigate } from "react-router-dom";
+import auth from "../../../firebase.init";
 import logo from "../../../images/logo.png";
 // import google from "../../images/google.png";
 // import github from "../../images/github.png";
@@ -8,6 +10,8 @@ import logo from "../../../images/logo.png";
 import "./LoginForm.css";
 
 const LoginForm = () => {
+  const [signInWithEmailAndPassword, user, loading, error] =
+    useSignInWithEmailAndPassword(auth);
   const emailRef = useRef();
   const passwordRef = useRef();
   //   -----------------------------------------
@@ -16,8 +20,12 @@ const LoginForm = () => {
 
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
-    console.log(email, password);
+    signInWithEmailAndPassword(email, password);
   };
+  const navigate = useNavigate();
+  if (user) {
+    navigate("/");
+  }
 
   return (
     <div className="text-center">

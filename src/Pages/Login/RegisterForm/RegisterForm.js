@@ -1,5 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 // import logo from "../../images/Logo.svg";
 // import google from "../../images/google.png";
 // import github from "../../images/github.png";
@@ -7,8 +8,11 @@ import { Link } from "react-router-dom";
 // import twitter from "../../images/twitter.png";
 
 import logo from "../../../images/logo.png";
+import auth from "../../../firebase.init";
 
 const RegisterForm = () => {
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
   //   -----------------------------------------
   const handleRegister = (e) => {
     e.preventDefault();
@@ -17,8 +21,15 @@ const RegisterForm = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
     const confirmPassword = e.target.confirmPassword.value;
-    console.log(name, email, password, confirmPassword);
+    // console.log(name, email, password, confirmPassword);
+    createUserWithEmailAndPassword(email, password);
+    // console.log(user);
   };
+
+  const navigate = useNavigate();
+  if (user) {
+    navigate("/");
+  }
 
   return (
     <div className="text-center">
