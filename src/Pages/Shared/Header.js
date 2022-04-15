@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import image from "../../images/logo.png";
 
 const Header = () => {
@@ -13,7 +14,7 @@ const Header = () => {
         variant="dark"
       >
         <Container>
-          <Navbar.Brand href="#home">
+          <Navbar.Brand as={Link} to="/">
             <span>
               <img src={image} alt="logo" />
             </span>
@@ -21,8 +22,9 @@ const Header = () => {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="#features">Service</Nav.Link>
-              <Nav.Link href="#pricing">About</Nav.Link>
+              <Nav.Link href="/home#service">Service</Nav.Link>
+              <Nav.Link href="/home#experts">Experts</Nav.Link>
+              <Nav.Link href="/home#about">About</Nav.Link>
               <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">
