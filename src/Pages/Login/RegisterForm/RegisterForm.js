@@ -8,7 +8,8 @@ import SocialLogin from "../../Shared/SocialLogin";
 
 const RegisterForm = () => {
   const [createUserWithEmailAndPassword, user, loading, error] =
-    useCreateUserWithEmailAndPassword(auth);
+    useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
+
   const [agree, setAgree] = useState(false);
   //   -----------------------------------------
   const handleRegister = (e) => {
