@@ -11,15 +11,29 @@ import {
 import auth from "../../firebase.init";
 
 const SocialLogin = () => {
-  const [signInWithGoogle, googleUser, GoogleLoading, GoogleError] =
+  const [signInWithGoogle, googleUser, googleLoading, googleError] =
     useSignInWithGoogle(auth);
   const [signInWithGithub, githubUser, githubLoading, githubError] =
     useSignInWithGithub(auth);
   const [signInWithFacebook, facebookUser, facebookLoading, facebookError] =
     useSignInWithFacebook(auth);
 
+  let errorMessage;
+  if (googleError || githubError || facebookError) {
+    errorMessage = (
+      <div>
+        <p className="text-warning fw-bold mt-3">
+          Error: {googleError?.message} {githubError?.message}{" "}
+          {facebookError?.message}
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div>
+      {errorMessage}
+
       <div className="w-100 mx-auto d-flex justify-content-center align-items-center">
         <div
           className="w-100"
