@@ -12,7 +12,7 @@ import "./LoginForm.css";
 const LoginForm = () => {
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
-  const [sendPasswordResetEmail] = useSendPasswordResetEmail(auth);
+  const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
   const emailRef = useRef();
   const passwordRef = useRef();
 
@@ -35,6 +35,7 @@ const LoginForm = () => {
   // ---------reset password-----------
   const resetPassword = async () => {
     await sendPasswordResetEmail(emailRef.current.value);
+
     alert("Sent email");
   };
 
