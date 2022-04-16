@@ -39,7 +39,7 @@ const RegisterForm = () => {
     navigate("/");
   }
 
-  if (loading) {
+  if (loading || updating) {
     return <Loading></Loading>;
   }
 

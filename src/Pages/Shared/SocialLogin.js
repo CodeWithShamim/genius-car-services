@@ -9,6 +9,7 @@ import {
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
+import Loading from "./Loading";
 
 const SocialLogin = () => {
   const [signInWithGoogle, googleUser, googleLoading, googleError] =
@@ -28,6 +29,10 @@ const SocialLogin = () => {
         </p>
       </div>
     );
+  }
+
+  if (googleLoading || githubLoading || facebookLoading) {
+    return <Loading></Loading>;
   }
 
   return (

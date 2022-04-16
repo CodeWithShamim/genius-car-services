@@ -9,6 +9,10 @@ import logo from "../../../images/logo.png";
 import Loading from "../../Shared/Loading";
 import SocialLogin from "../../Shared/SocialLogin";
 import "./LoginForm.css";
+// -----------------toast-----------
+import { ToastContainer, toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 
 const LoginForm = () => {
   const [signInWithEmailAndPassword, user, loading, error] =
@@ -35,12 +39,15 @@ const LoginForm = () => {
 
   // ---------reset password-----------
   const resetPassword = async () => {
-    await sendPasswordResetEmail(emailRef.current.value);
-
-    alert("Sent email");
+    if (emailRef.current.value) {
+      await sendPasswordResetEmail(emailRef.current.value);
+      toast("Email successfully send");
+    } else {
+      toast("Please, enter your email!");
+    }
   };
 
-  if (loading) {
+  if (loading || sending) {
     return <Loading></Loading>;
   }
 
@@ -66,6 +73,7 @@ const LoginForm = () => {
                 className="form-control"
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
+                required
               />
             </div>
             <div class="mb-3">
@@ -77,6 +85,7 @@ const LoginForm = () => {
                 type="password"
                 class="form-control"
                 id="exampleInputPassword1"
+                required
               />
             </div>
 
@@ -109,6 +118,9 @@ const LoginForm = () => {
         >
           Forgot your password?
         </Link>
+
+        {/* ___________toast________________ */}
+        <ToastContainer></ToastContainer>
 
         {/* ------------------------------ */}
         <SocialLogin></SocialLogin>
