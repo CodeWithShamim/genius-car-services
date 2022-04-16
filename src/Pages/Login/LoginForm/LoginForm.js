@@ -3,10 +3,7 @@ import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../../firebase.init";
 import logo from "../../../images/logo.png";
-// import google from "../../images/google.png";
-// import github from "../../images/github.png";
-// import facebook from "../../images/facebook.png";
-// import twitter from "../../images/twitter.png";
+import SocialLogin from "../../Shared/SocialLogin";
 import "./LoginForm.css";
 
 const LoginForm = () => {
@@ -86,49 +83,8 @@ const LoginForm = () => {
           </button>
         </form>
 
-        <p className="bg-light rounded mx-auto my-3">
-          <hr />
-        </p>
-        <p>Continue With.... </p>
-        {/* <div className="icon-container d-flex justify-content-evenly">
-          <span>
-            <img
-              onClick={() => {
-                signInWithGoogle().then(() =>
-                  navigate(from, { replace: true })
-                );
-              }}
-              src={google}
-              alt="google icon"
-            />
-          </span>
-          <span>
-            <img
-              onClick={() => {
-                signInWithGithub().then(() =>
-                  navigate(from, { replace: true })
-                );
-              }}
-              src={github}
-              className="github-item"
-              alt="github icon"
-            />
-          </span>
-          <span>
-            <img
-              onClick={() => {
-                signInWithFacebook().then(() =>
-                  navigate(from, { replace: true })
-                );
-              }}
-              src={facebook}
-              alt="facebook icon"
-            />
-          </span>
-          <span>
-            <img src={twitter} alt="twitter icon" />
-          </span>
-        </div> */}
+        {/* ------------------------------ */}
+        <SocialLogin></SocialLogin>
       </div>
     </div>
   );

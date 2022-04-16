@@ -1,14 +1,10 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
-// import logo from "../../images/Logo.svg";
-// import google from "../../images/google.png";
-// import github from "../../images/github.png";
-// import facebook from "../../images/facebook.png";
-// import twitter from "../../images/twitter.png";
 
 import logo from "../../../images/logo.png";
 import auth from "../../../firebase.init";
+import SocialLogin from "../../Shared/SocialLogin";
 
 const RegisterForm = () => {
   const [createUserWithEmailAndPassword, user, loading, error] =
@@ -117,49 +113,8 @@ const RegisterForm = () => {
           </button>
         </form>
 
-        <p className="bg-light rounded mx-auto my-3">
-          <hr />
-        </p>
-        <p>Continue With.... </p>
-        {/* <div className="icon-container d-flex justify-content-evenly">
-          <span>
-            <img
-              onClick={() => {
-                signInWithGoogle().then(() =>
-                  navigate(from, { replace: true })
-                );
-              }}
-              src={google}
-              alt="google icon"
-            />
-          </span>
-          <span>
-            <img
-              onClick={() => {
-                SignInWithGithub().then(() =>
-                  navigate(from, { replace: true })
-                );
-              }}
-              src={github}
-              className="github-item"
-              alt="github icon"
-            />
-          </span>
-          <span>
-            <img
-              onClick={() => {
-                SignInWithFacebook().then(() =>
-                  navigate(from, { replace: true })
-                );
-              }}
-              src={facebook}
-              alt="facebook icon"
-            />
-          </span>
-          <span>
-            <img src={twitter} alt="twitter icon" />
-          </span>
-        </div> */}
+        {/* --------------------------------------- */}
+        <SocialLogin></SocialLogin>
       </div>
     </div>
   );

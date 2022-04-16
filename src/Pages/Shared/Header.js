@@ -23,7 +23,7 @@ const Header = () => {
         <Container>
           <Navbar.Brand as={Link} to="/">
             <span>
-              <img src={image} alt="logo" />
+              <img className="w-75" src={image} alt="logo" />
             </span>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
