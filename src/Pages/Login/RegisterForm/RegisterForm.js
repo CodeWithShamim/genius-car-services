@@ -8,6 +8,7 @@ import {
 import logo from "../../../images/logo.png";
 import auth from "../../../firebase.init";
 import SocialLogin from "../../Shared/SocialLogin";
+import Loading from "../../Shared/Loading";
 
 const RegisterForm = () => {
   const [createUserWithEmailAndPassword, user, loading, error] =
@@ -36,6 +37,10 @@ const RegisterForm = () => {
   if (user) {
     console.log(user);
     navigate("/");
+  }
+
+  if (loading) {
+    return <Loading></Loading>;
   }
 
   return (

@@ -6,6 +6,7 @@ import {
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../../firebase.init";
 import logo from "../../../images/logo.png";
+import Loading from "../../Shared/Loading";
 import SocialLogin from "../../Shared/SocialLogin";
 import "./LoginForm.css";
 
@@ -38,6 +39,10 @@ const LoginForm = () => {
 
     alert("Sent email");
   };
+
+  if (loading) {
+    return <Loading></Loading>;
+  }
 
   return (
     <div className="text-center">
