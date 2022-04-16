@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 
@@ -9,6 +9,7 @@ import SocialLogin from "../../Shared/SocialLogin";
 const RegisterForm = () => {
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
+  const [agree, setAgree] = useState(false);
   //   -----------------------------------------
   const handleRegister = (e) => {
     e.preventDefault();
@@ -93,8 +94,15 @@ const RegisterForm = () => {
             </div>
             <p>
               {" "}
-              <input type="checkbox" name="terms" id="terms" />{" "}
-              <span>Accept Genius Car Services Terms & Condition</span>
+              <input
+                onClick={() => setAgree(!agree)}
+                type="checkbox"
+                name="terms"
+                id="terms"
+              />{" "}
+              <span className={agree ? "text-info" : "text-light"}>
+                Accept Genius Car Services Terms & Condition
+              </span>
             </p>
             {/* <p className="fs-6 text-center text-warning">
               {error && (
@@ -111,6 +119,7 @@ const RegisterForm = () => {
           </div>
 
           <button
+            disabled={!agree}
             type="submit"
             className="login-btn btn btn-warning w-100 fw-bold fs-4"
           >
