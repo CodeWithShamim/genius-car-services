@@ -3,8 +3,21 @@ import React from "react";
 import google from "../../images/social-icon/google.png";
 import github from "../../images/social-icon/github.png";
 import facebook from "../../images/social-icon/facebook.png";
+import {
+  useSignInWithFacebook,
+  useSignInWithGithub,
+  useSignInWithGoogle,
+} from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
 
 const SocialLogin = () => {
+  const [signInWithGoogle, googleUser, GoogleLoading, GoogleError] =
+    useSignInWithGoogle(auth);
+  const [signInWithGithub, githubUser, githubLoading, githubError] =
+    useSignInWithGithub(auth);
+  const [signInWithFacebook, facebookUser, facebookLoading, facebookError] =
+    useSignInWithFacebook(auth);
+
   return (
     <div>
       <div className="w-100 mx-auto d-flex justify-content-center align-items-center">
@@ -23,6 +36,7 @@ const SocialLogin = () => {
 
       <div className="w-75 mx-auto">
         <p
+          onClick={() => signInWithGoogle()}
           className="border border-light  bg-dark"
           style={{ borderRadius: "30px" }}
         >
@@ -31,6 +45,7 @@ const SocialLogin = () => {
         </p>
 
         <p
+          onClick={() => signInWithGithub()}
           className="border border-light  bg-info"
           style={{ borderRadius: "30px" }}
         >
@@ -39,6 +54,7 @@ const SocialLogin = () => {
         </p>
 
         <p
+          onClick={() => signInWithFacebook()}
           className="border border-light  bg-primary"
           style={{ borderRadius: "30px" }}
         >
