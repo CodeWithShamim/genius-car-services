@@ -91,6 +91,11 @@ const RegisterForm = () => {
                 id="exampleInputConfirm-password"
               />
             </div>
+            <p>
+              {" "}
+              <input type="checkbox" name="terms" id="terms" />{" "}
+              <span>Accept Genius Car Services Terms & Condition</span>
+            </p>
             {/* <p className="fs-6 text-center text-warning">
               {error && (
                 <>

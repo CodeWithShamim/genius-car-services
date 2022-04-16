@@ -1,5 +1,8 @@
 import { useRef } from "react";
-import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import {
+  useSendPasswordResetEmail,
+  useSignInWithEmailAndPassword,
+} from "react-firebase-hooks/auth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../../firebase.init";
 import logo from "../../../images/logo.png";
@@ -9,14 +12,17 @@ import "./LoginForm.css";
 const LoginForm = () => {
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
+  const [sendPasswordResetEmail] = useSendPasswordResetEmail(auth);
   const emailRef = useRef();
   const passwordRef = useRef();
+
   //   -----------------------------------------
+
   const handleLogin = (e) => {
     e.preventDefault();
-
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
+
     signInWithEmailAndPassword(email, password);
   };
   const navigate = useNavigate();
@@ -25,6 +31,12 @@ const LoginForm = () => {
   if (user) {
     navigate(from);
   }
+
+  // ---------reset password-----------
+  const resetPassword = async () => {
+    await sendPasswordResetEmail(emailRef.current.value);
+    alert("Sent email");
+  };
 
   return (
     <div className="text-center">
@@ -61,6 +73,7 @@ const LoginForm = () => {
                 id="exampleInputPassword1"
               />
             </div>
+
             <p className="signup">
               Don't have an account? <Link to="/signup">sign up</Link>
             </p>
@@ -82,6 +95,14 @@ const LoginForm = () => {
             Login
           </button>
         </form>
+
+        <Link
+          to=""
+          onClick={resetPassword}
+          className="text-danger fw-bold mt-3"
+        >
+          Forgot your password?
+        </Link>
 
         {/* ------------------------------ */}
         <SocialLogin></SocialLogin>
