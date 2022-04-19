@@ -13,6 +13,7 @@ import "./LoginForm.css";
 import { ToastContainer, toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
+import DynamicTitle from "../../Shared/DynamicTitle";
 
 const LoginForm = () => {
   const [signInWithEmailAndPassword, user, loading, error] =
@@ -53,6 +54,7 @@ const LoginForm = () => {
 
   return (
     <div className="text-center">
+      <DynamicTitle title={"login"}></DynamicTitle>
       <div
         className="w-50 mx-auto login-container mt-3"
         data-aos="fade-right"
