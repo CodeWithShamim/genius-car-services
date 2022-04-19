@@ -9,6 +9,7 @@ import logo from "../../../images/logo.png";
 import auth from "../../../firebase.init";
 import SocialLogin from "../../Shared/SocialLogin";
 import Loading from "../../Shared/Loading";
+import DynamicTitle from "../../Shared/DynamicTitle";
 
 const RegisterForm = () => {
   const [createUserWithEmailAndPassword, user, loading, error] =
@@ -45,6 +46,7 @@ const RegisterForm = () => {
 
   return (
     <div className="text-center">
+      <DynamicTitle title={"singup"}></DynamicTitle>
       <div
         className="w-50 mx-auto login-container mt-3"
         data-aos="fade-down"
