@@ -34,7 +34,15 @@ async function run() {
             const result = await serviceCollection.findOne(query);
             res.send(result);
         });
-        // post 
+
+        // delete 
+        app.delete('/services/:id', async(req, res) => {
+                const id = req.params.id;
+                const query = { _id: ObjectId(id) };
+                const result = await serviceCollection.deleteOne(query);
+                res.send(result);
+            })
+            // post 
         app.post('/services', async(req, res) => {
             // const id = req.params.id;
             const service = req.body;
