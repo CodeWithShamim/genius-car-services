@@ -10,6 +10,7 @@ import LoginForm from "./Pages/Login/LoginForm/LoginForm";
 import RegisterForm from "./Pages/Login/RegisterForm/RegisterForm";
 import CheckOut from "./Pages/CheckOut/CheckOut";
 import RequirAuth from "./Pages/Login/RequirAuth/RequirAuth";
+import PostData from "./Pages/PostData/PostData";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
             </RequirAuth>
           }
         ></Route>
+        <Route path="/post" element={<PostData></PostData>}></Route>
         <Route path="*" element={<NotFound></NotFound>}></Route>
       </Routes>
       <Footer></Footer>
