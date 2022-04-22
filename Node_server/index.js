@@ -27,9 +27,10 @@ async function run() {
             res.send(result);
         });
         // post 
-        app.post('/services/:id', async(req, res) => {
+        app.post('/services', async(req, res) => {
             // const id = req.params.id;
             const service = req.body;
+            console.log(service)
             const result = await serviceCollection.insertOne(service);
             res.send(result);
 
