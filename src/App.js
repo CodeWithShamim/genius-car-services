@@ -11,6 +11,7 @@ import RegisterForm from "./Pages/Login/RegisterForm/RegisterForm";
 import CheckOut from "./Pages/CheckOut/CheckOut";
 import RequirAuth from "./Pages/Login/RequirAuth/RequirAuth";
 import PostData from "./Pages/PostData/PostData";
+import UpdateService from "./Pages/ServiceDetail/UpdateService";
 
 function App() {
   return (
@@ -22,6 +23,10 @@ function App() {
         <Route
           path="service/:serviceId"
           element={<ServiceDetail></ServiceDetail>}
+        ></Route>
+        <Route
+          path="/update/:id"
+          element={<UpdateService></UpdateService>}
         ></Route>
         <Route path="/login" element={<LoginForm></LoginForm>}></Route>
         <Route path="/signup" element={<RegisterForm></RegisterForm>}></Route>

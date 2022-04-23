@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 const ServiceDetail = () => {
   const { serviceId } = useParams();
@@ -31,11 +31,27 @@ const ServiceDetail = () => {
     }
   };
 
+  const navigate = useNavigate();
+  const handleUpdate = (id) => {
+    navigate(`/update/${id}`);
+  };
+
   return (
     <div>
       <h1>
         Service Detail Id: {service.name}
-        <button onClick={handleDelete}>X</button>
+        <span>
+          {" "}
+          <button className="btn btn-danger" onClick={handleDelete}>
+            Delete
+          </button>
+          <button
+            className="ms-2 btn btn-primary"
+            onClick={() => handleUpdate(serviceId)}
+          >
+            Update
+          </button>
+        </span>
       </h1>
       <Link to="/checkout" className="btn btn-primary">
         Check Out
