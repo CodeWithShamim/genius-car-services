@@ -10,6 +10,7 @@ import {
 } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import Loading from "./Loading";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const SocialLogin = () => {
   const [signInWithGoogle, googleUser, googleLoading, googleError] =
@@ -18,6 +19,12 @@ const SocialLogin = () => {
     useSignInWithGithub(auth);
   const [signInWithFacebook, facebookUser, facebookLoading, facebookError] =
     useSignInWithFacebook(auth);
+
+  // -----------------------------------
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+  // ---------------------------------------------
 
   let errorMessage;
   if (googleError || githubError || facebookError) {
@@ -33,6 +40,10 @@ const SocialLogin = () => {
 
   if (googleLoading || githubLoading || facebookLoading) {
     return <Loading></Loading>;
+  }
+
+  if (googleUser || githubUser || facebookUser) {
+    navigate(from);
   }
 
   return (

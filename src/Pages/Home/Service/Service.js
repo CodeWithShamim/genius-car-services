@@ -7,10 +7,10 @@ const Service = ({ service }) => {
 
   const navigate = useNavigate();
   const handleServiceDetail = (_id) => {
-    navigate(`/service/${_id}`);
+    navigate(`/checkout/${_id}`);
   };
   return (
-    <div className="service-container" style={{ minHeight: "100vh" }}>
+    <div className="service-container">
       <img className="img-fluid" src={img} alt="" />
       <h3>{name}</h3>
       <p>{description}</p>

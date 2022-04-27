@@ -5,13 +5,13 @@ import Home from "./Pages/Home/Home/Home";
 import Footer from "./Pages/Shared/Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NotFound from "./Pages/Shared/NotFound";
-import ServiceDetail from "./Pages/ServiceDetail/ServiceDetail";
 import LoginForm from "./Pages/Login/LoginForm/LoginForm";
 import RegisterForm from "./Pages/Login/RegisterForm/RegisterForm";
-import CheckOut from "./Pages/CheckOut/CheckOut";
 import RequirAuth from "./Pages/Login/RequirAuth/RequirAuth";
 import PostData from "./Pages/PostData/PostData";
-import UpdateService from "./Pages/ServiceDetail/UpdateService";
+import UpdateService from "./Pages/CheckOutDetail/UpdateService";
+import CheckOut from "./Pages/CheckOutDetail/CheckOut";
+import Orders from "./Pages/Orders/Orders";
 
 function App() {
   return (
@@ -21,8 +21,8 @@ function App() {
         <Route path="/" element={<Home></Home>}></Route>
         <Route path="/home" element={<Home></Home>}></Route>
         <Route
-          path="service/:serviceId"
-          element={<ServiceDetail></ServiceDetail>}
+          path="checkout/:serviceId"
+          element={<CheckOut></CheckOut>}
         ></Route>
         <Route
           path="/update/:id"
@@ -31,10 +31,10 @@ function App() {
         <Route path="/login" element={<LoginForm></LoginForm>}></Route>
         <Route path="/signup" element={<RegisterForm></RegisterForm>}></Route>
         <Route
-          path="/checkout"
+          path="/orders"
           element={
             <RequirAuth>
-              <CheckOut></CheckOut>
+              <Orders></Orders>
             </RequirAuth>
           }
         ></Route>
