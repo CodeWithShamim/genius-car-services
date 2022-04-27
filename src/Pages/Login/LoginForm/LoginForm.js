@@ -35,6 +35,7 @@ const LoginForm = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
   if (user) {
+    toast("Congratulations, login success!");
     navigate(from);
   }
 

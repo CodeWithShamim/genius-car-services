@@ -12,6 +12,7 @@ import PostData from "./Pages/PostData/PostData";
 import UpdateService from "./Pages/CheckOutDetail/UpdateService";
 import CheckOut from "./Pages/CheckOutDetail/CheckOut";
 import Orders from "./Pages/Orders/Orders";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
@@ -42,6 +43,9 @@ function App() {
         <Route path="*" element={<NotFound></NotFound>}></Route>
       </Routes>
       <Footer></Footer>
+
+      {/* toast  */}
+      <ToastContainer></ToastContainer>
     </div>
   );
 }

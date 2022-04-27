@@ -1,10 +1,13 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const UpdateService = () => {
   const { id } = useParams();
   const { register, handleSubmit } = useForm();
+  const navigate = useNavigate();
+
   const onSubmit = (data) => {
     console.log(data);
     const url = `http://localhost:5000/services/${id}`;
@@ -16,7 +19,12 @@ const UpdateService = () => {
       body: JSON.stringify(data),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        if (data) {
+          toast.success("Update success!");
+          navigate("/");
+        }
+      });
   };
   return (
     <div
@@ -29,14 +37,25 @@ const UpdateService = () => {
           className="mt-5 d-flex flex-column"
         >
           <input
+            className="my-2"
             {...register("name", { required: true, maxLength: 20 })}
             placeholder="Name"
           />
           <input {...register("description")} placeholder="Description" />
 
-          <input type="price" {...register("price")} placeholder="price" />
-          <input type="text" {...register("img")} placeholder="Photo url" />
-          <input className="btn btn-info" type="submit" value="Update now" />
+          <input
+            className="my-2"
+            type="price"
+            {...register("price")}
+            placeholder="price"
+          />
+          <input
+            className="mb-2"
+            type="text"
+            {...register("img")}
+            placeholder="Photo url"
+          />
+          <input className="btn btn-warning" type="submit" value="Update now" />
         </form>
       </div>
     </div>

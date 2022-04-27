@@ -10,6 +10,7 @@ import auth from "../../../firebase.init";
 import SocialLogin from "../../Shared/SocialLogin";
 import Loading from "../../Shared/Loading";
 import DynamicTitle from "../../Shared/DynamicTitle";
+import { toast } from "react-toastify";
 
 const RegisterForm = () => {
   const [createUserWithEmailAndPassword, user, loading, error] =
@@ -36,7 +37,7 @@ const RegisterForm = () => {
 
   const navigate = useNavigate();
   if (user) {
-    console.log(user);
+    toast("Congratulations, sign up success!");
     navigate("/");
   }
 

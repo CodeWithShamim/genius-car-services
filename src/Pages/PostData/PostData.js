@@ -1,8 +1,12 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const PostData = () => {
   const { register, handleSubmit } = useForm();
+  const navigate = useNavigate();
+
   const onSubmit = (data) => {
     console.log(data);
     fetch("http://localhost:5000/services", {
@@ -13,7 +17,12 @@ const PostData = () => {
       body: JSON.stringify(data),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        if (data) {
+          toast.success("Service post success!");
+          navigate("/");
+        }
+      });
   };
 
   return (
@@ -23,13 +32,14 @@ const PostData = () => {
     >
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="mt-5 d-flex flex-column"
+        className="mt-5 d-flex flex-column w-100"
       >
         <input
           {...register("name", { required: true, maxLength: 20 })}
           placeholder="Name"
         />
         <input
+          className="my-2"
           {...register("description", { pattern: /^[A-Za-z]+$/i })}
           placeholder="Description"
         />
@@ -39,8 +49,13 @@ const PostData = () => {
           {...register("price", { min: 18, max: 99 })}
           placeholder="price"
         />
-        <input type="text" {...register("img")} placeholder="Photo url" />
-        <input type="submit" value="Submit" />
+        <input
+          className="my-2"
+          type="text"
+          {...register("img")}
+          placeholder="Photo url"
+        />
+        <input className="btn btn-primary " type="submit" value="Submit" />
       </form>
     </div>
   );

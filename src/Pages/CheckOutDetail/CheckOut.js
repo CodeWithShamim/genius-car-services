@@ -1,13 +1,19 @@
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import auth from "../../firebase.init";
 
 const CheckOut = () => {
   const { serviceId } = useParams();
   const [service, setService] = useState({});
-
   const [user] = useAuthState(auth);
+  const [info, setInfo] = useState({
+    name: user?.displayName,
+    email: user?.email,
+    address: "Rangpur, Bangladesh",
+    phone: "01700000000",
+  });
 
   useEffect(() => {
     const url = `http://localhost:5000/services/${serviceId}`;
@@ -26,7 +32,10 @@ const CheckOut = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
+          if (data) {
+            toast.warn("Successfully deleted this service!!");
+            navigate("/");
+          }
           // const remaining = services.filter(
           //   (service) => service._id !== serviceId
           // );
@@ -38,6 +47,22 @@ const CheckOut = () => {
   const navigate = useNavigate();
   const handleUpdate = (id) => {
     navigate(`/update/${id}`);
+  };
+
+  // =============================handle address & phone info change =============================
+  const handleAddress = (e) => {
+    const { address, ...rest } = info;
+    const newAddress = e.target.value;
+
+    // console.log(address, rest);
+    setInfo(newAddress, rest);
+  };
+  const handlephone = (e) => {
+    const { address, ...rest } = info;
+    const newPhone = e.target.value;
+
+    // console.log(address, rest);
+    setInfo(newPhone, rest);
   };
 
   return (
@@ -76,7 +101,7 @@ const CheckOut = () => {
             required
             readOnly
             disabled
-            value={user?.displayName}
+            value={info.name}
           />
           <br />
           <label htmlFor="email" className="float-start">
@@ -85,7 +110,7 @@ const CheckOut = () => {
           <input
             type="email"
             name="email"
-            value={user?.email}
+            value={info.email}
             id="email"
             required
             readOnly
@@ -97,6 +122,8 @@ const CheckOut = () => {
             Address:
           </label>
           <textarea
+            value={info.address}
+            onChange={handleAddress}
             name="address"
             id="address"
             cols="30"
@@ -108,7 +135,14 @@ const CheckOut = () => {
             {" "}
             Phone:
           </label>
-          <input type="number" name="phone" id="phone" className="w-100 my-2" />
+          <input
+            value={info.phone}
+            onClick={handlephone}
+            type="number"
+            name="phone"
+            id="phone"
+            className="w-100 my-2"
+          />
         </form>
       </div>
 
