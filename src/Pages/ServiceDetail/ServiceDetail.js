@@ -37,9 +37,13 @@ const ServiceDetail = () => {
   };
 
   return (
-    <div>
+    <div
+      style={{ minHeight: "60vh" }}
+      className="d-flex flex flex-column align-items-center justify-content-center"
+    >
       <h1>
-        Service Detail Id: {service.name}
+        <span>Service name:</span>{" "}
+        <span className="text-primary">{service.name}</span>
         <span>
           {" "}
           <button className="btn btn-danger" onClick={handleDelete}>

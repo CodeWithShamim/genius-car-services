@@ -19,7 +19,10 @@ const UpdateService = () => {
       .then((data) => console.log(data));
   };
   return (
-    <div>
+    <div
+      style={{ minHeight: "60vh" }}
+      className="d-flex flex flex-column align-items-center justify-content-center"
+    >
       <div className="w-50 mx-auto">
         <form
           onSubmit={handleSubmit(onSubmit)}

@@ -17,7 +17,10 @@ const PostData = () => {
   };
 
   return (
-    <div className="w-50 mx-auto">
+    <div
+      style={{ minHeight: "60vh" }}
+      className="w-50 mx-auto d-flex flex flex-column align-items-center justify-content-center"
+    >
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="mt-5 d-flex flex-column"

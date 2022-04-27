@@ -10,7 +10,7 @@ const Service = ({ service }) => {
     navigate(`/service/${_id}`);
   };
   return (
-    <div className="service-container">
+    <div className="service-container" style={{ minHeight: "100vh" }}>
       <img className="img-fluid" src={img} alt="" />
       <h3>{name}</h3>
       <p>{description}</p>
