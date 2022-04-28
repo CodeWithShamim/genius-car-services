@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -8,12 +9,12 @@ const CheckOut = () => {
   const { serviceId } = useParams();
   const [service, setService] = useState({});
   const [user] = useAuthState(auth);
-  const [info, setInfo] = useState({
-    name: user?.displayName,
-    email: user?.email,
-    address: "Rangpur, Bangladesh",
-    phone: "01700000000",
-  });
+  // const [info, setInfo] = useState({
+  //   name: user?.displayName,
+  //   email: user?.email,
+  //   address: "Rangpur, Bangladesh",
+  //   phone: "01700000000",
+  // });
 
   useEffect(() => {
     const url = `http://localhost:5000/services/${serviceId}`;
@@ -50,19 +51,40 @@ const CheckOut = () => {
   };
 
   // =============================handle address & phone info change =============================
-  const handleAddress = (e) => {
-    const { address, ...rest } = info;
-    const newAddress = e.target.value;
+  // const handleAddress = (e) => {
+  //   const { address, ...rest } = info;
+  //   const newAddress = e.target.value;
 
-    // console.log(address, rest);
-    setInfo(newAddress, rest);
-  };
-  const handlephone = (e) => {
-    const { address, ...rest } = info;
-    const newPhone = e.target.value;
+  //   // console.log(address, rest);
+  //   setInfo(newAddress, rest);
+  // };
+  // const handlephone = (e) => {
+  //   const { address, ...rest } = info;
+  //   const newPhone = e.target.value;
 
-    // console.log(address, rest);
-    setInfo(newPhone, rest);
+  //   // console.log(address, rest);
+  //   setInfo(newPhone, rest);
+  // };
+
+  // ===========handleOrderSubmit===============
+  const handleOrderSubmit = (e) => {
+    e.preventDefault();
+    const order = {
+      name: e.target.name.value,
+      serviceName: service.name,
+      servicesId: serviceId,
+      email: e.target.email.value,
+      address: e.target.address.value,
+      phone: e.target.phone.value,
+    };
+
+    axios.post("http://localhost:5000/ordersDetail", order).then((res) => {
+      const { data } = res;
+      if (data.insertedId) {
+        toast.success("Your order is booked");
+        navigate("/orders");
+      }
+    });
   };
 
   return (
@@ -89,7 +111,7 @@ const CheckOut = () => {
 
       {/* orders form  */}
       <div className="w-100">
-        <form action="">
+        <form onSubmit={handleOrderSubmit}>
           <label htmlFor="name" className="float-start">
             Name:
           </label>
@@ -101,7 +123,7 @@ const CheckOut = () => {
             required
             readOnly
             disabled
-            value={info.name}
+            value={user?.displayName}
           />
           <br />
           <label htmlFor="email" className="float-start">
@@ -110,7 +132,7 @@ const CheckOut = () => {
           <input
             type="email"
             name="email"
-            value={info.email}
+            value={user?.email}
             id="email"
             required
             readOnly
@@ -122,8 +144,8 @@ const CheckOut = () => {
             Address:
           </label>
           <textarea
-            value={info.address}
-            onChange={handleAddress}
+            // value={info.address}
+            // onChange={handleAddress}
             name="address"
             id="address"
             cols="30"
@@ -136,19 +158,21 @@ const CheckOut = () => {
             Phone:
           </label>
           <input
-            value={info.phone}
-            onClick={handlephone}
+            // value={info.phone}
+            // onClick={handlephone}
             type="number"
             name="phone"
             id="phone"
             className="w-100 my-2"
           />
+
+          <input
+            className="btn btn-primary px-5"
+            type="submit"
+            value="Get Order"
+          />
         </form>
       </div>
-
-      <Link to="/orders" className="btn btn-primary px-5">
-        Get Order
-      </Link>
     </div>
   );
 };
