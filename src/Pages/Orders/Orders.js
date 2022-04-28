@@ -1,9 +1,9 @@
-import axios from "axios";
 import { signOut } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import axiosSecret from "../../api/axiosSecret";
 import auth from "../../firebase.init";
 import DynamicTitle from "../Shared/DynamicTitle";
 
@@ -19,11 +19,12 @@ const Orders = () => {
 
       // try=catch
       try {
-        const { data } = await axios.get(url, {
-          headers: {
-            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          },
-        });
+        // const { data } = await axios.get(url, {
+        //   headers: {
+        //     authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        //   },
+        // });
+        const { data } = await axiosSecret.get(url);
         // .then((res) => console.log(res));
         setOrders(data);
       } catch (error) {
