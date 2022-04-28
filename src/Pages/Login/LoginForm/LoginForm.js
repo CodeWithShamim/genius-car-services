@@ -14,6 +14,7 @@ import { ToastContainer, toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
 import DynamicTitle from "../../Shared/DynamicTitle";
+import axios from "axios";
 
 const LoginForm = () => {
   const [signInWithEmailAndPassword, user, loading, error] =
@@ -24,19 +25,27 @@ const LoginForm = () => {
 
   //   -----------------------------------------
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
 
-    signInWithEmailAndPassword(email, password);
+    await signInWithEmailAndPassword(email, password);
+    // ===============post data===================
+    const { data } = await axios.post("http://localhost:5000/getToken", {
+      email,
+    });
+    localStorage.setItem("accessToken", data);
+    toast("Congratulations, login success!");
+    navigate(from);
   };
+
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
   if (user) {
-    toast("Congratulations, login success!");
-    navigate(from);
+    // toast("Congratulations, login success!");
+    // navigate(from);
   }
 
   // ---------reset password-----------
