@@ -17,7 +17,7 @@ const CheckOut = () => {
   // });
 
   useEffect(() => {
-    const url = `http://localhost:5000/services/${serviceId}`;
+    const url = `https://genius-car-services-100.herokuapp.com/services/${serviceId}`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => setService(data));
@@ -27,7 +27,7 @@ const CheckOut = () => {
   const handleDelete = () => {
     const proceed = window.confirm("Are you sure delete this item??");
     if (proceed) {
-      const url = `http://localhost:5000/services/${serviceId}`;
+      const url = `https://genius-car-services-100.herokuapp.com/services/${serviceId}`;
       fetch(url, {
         method: "delete",
       })
@@ -79,12 +79,17 @@ const CheckOut = () => {
     };
 
     if (user) {
-      axios.post("http://localhost:5000/ordersDetail", order).then((res) => {
-        const { data } = res;
-        if (data.insertedId) {
-          toast.success("Your order is booked");
-        }
-      });
+      axios
+        .post(
+          "https://genius-car-services-100.herokuapp.com/ordersDetail",
+          order
+        )
+        .then((res) => {
+          const { data } = res;
+          if (data.insertedId) {
+            toast.success("Your order is booked");
+          }
+        });
     }
     navigate("/orders");
   };

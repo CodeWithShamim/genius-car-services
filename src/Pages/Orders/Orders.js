@@ -15,7 +15,7 @@ const Orders = () => {
   useEffect(() => {
     const getOrders = async () => {
       const email = user.email;
-      const url = `http://localhost:5000/orders?email=${email}`;
+      const url = `https://genius-car-services-100.herokuapp.com/orders?email=${email}`;
 
       // try=catch
       try {

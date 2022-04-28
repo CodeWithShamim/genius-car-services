@@ -32,9 +32,12 @@ const LoginForm = () => {
 
     await signInWithEmailAndPassword(email, password);
     // ===============post data===================
-    const { data } = await axios.post("http://localhost:5000/getToken", {
-      email,
-    });
+    const { data } = await axios.post(
+      "https://genius-car-services-100.herokuapp.com/getToken",
+      {
+        email,
+      }
+    );
     localStorage.setItem("accessToken", data);
     toast("Congratulations, login success!");
     navigate(from);
