@@ -25,7 +25,13 @@ const Orders = () => {
       className="d-flex flex flex-column align-items-center justify-content-center"
     >
       <DynamicTitle title={"checkout"}></DynamicTitle>
-      <h1>this is orders : {orders?.length}</h1>
+      <h1>
+        <span className="text-info">Your total order is : </span>
+        <span className="text-warning">{orders?.length}</span>
+      </h1>
+      {orders.map((order) => (
+        <h5>{order?.serviceName}</h5>
+      ))}
     </div>
   );
 };

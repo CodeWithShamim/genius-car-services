@@ -78,13 +78,15 @@ const CheckOut = () => {
       phone: e.target.phone.value,
     };
 
-    axios.post("http://localhost:5000/ordersDetail", order).then((res) => {
-      const { data } = res;
-      if (data.insertedId) {
-        toast.success("Your order is booked");
-        navigate("/orders");
-      }
-    });
+    if (user) {
+      axios.post("http://localhost:5000/ordersDetail", order).then((res) => {
+        const { data } = res;
+        if (data.insertedId) {
+          toast.success("Your order is booked");
+        }
+      });
+    }
+    navigate("/orders");
   };
 
   return (
