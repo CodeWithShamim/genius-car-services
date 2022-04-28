@@ -1,20 +1,46 @@
-import { async } from "@firebase/util";
 import axios from "axios";
+import { signOut } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import auth from "../../firebase.init";
 import DynamicTitle from "../Shared/DynamicTitle";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [user] = useAuthState(auth);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getOrders = async () => {
       const email = user.email;
       const url = `http://localhost:5000/orders?email=${email}`;
-      const { data } = await axios.get(url);
-      setOrders(data);
+
+      // try=catch
+      try {
+        const { data } = await axios.get(url, {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        });
+        // .then((res) => console.log(res));
+        setOrders(data);
+      } catch (error) {
+        // console.log(error);
+        // console.log(error.message);
+        // console.log(error.response.status);
+        if (error.response.status === 401) {
+          toast.error("Unauthorized access");
+          signOut(auth);
+          navigate("/login");
+        }
+        if (error.response.status === 403) {
+          toast.error("Forbidden access");
+          signOut(auth);
+          navigate("/login");
+        }
+      }
     };
     getOrders();
   }, []);
