@@ -15,6 +15,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import DynamicTitle from "../../Shared/DynamicTitle";
 import axios from "axios";
+import useToken from "../../../hooks/useToken";
 
 const LoginForm = () => {
   const [signInWithEmailAndPassword, user, loading, error] =
@@ -32,23 +33,24 @@ const LoginForm = () => {
 
     await signInWithEmailAndPassword(email, password);
     // ===============post data===================
-    const { data } = await axios.post(
-      "https://genius-car-services-100.herokuapp.com/getToken",
-      {
-        email,
-      }
-    );
-    localStorage.setItem("accessToken", data);
-    toast("Congratulations, login success!");
-    navigate(from);
+    // const { data } = await axios.post(
+    //   "https://genius-car-services-100.herokuapp.com/getToken",
+    //   {
+    //     email,
+    //   }
+    // );
+    // localStorage.setItem("accessToken", data);
   };
 
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
-  if (user) {
-    // toast("Congratulations, login success!");
-    // navigate(from);
+
+  //   ========token================
+  const [token] = useToken(user);
+  if (token) {
+    toast("Congratulations, login success!");
+    navigate(from);
   }
 
   // ---------reset password-----------

@@ -11,11 +11,14 @@ import SocialLogin from "../../Shared/SocialLogin";
 import Loading from "../../Shared/Loading";
 import DynamicTitle from "../../Shared/DynamicTitle";
 import { toast } from "react-toastify";
+import useToken from "../../../hooks/useToken";
 
 const RegisterForm = () => {
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
   const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+  // ====token=========
+  const [token] = useToken(user);
 
   const [agree, setAgree] = useState(false);
   //   -----------------------------------------
@@ -28,15 +31,16 @@ const RegisterForm = () => {
     const confirmPassword = e.target.confirmPassword.value;
     // console.log(name, email, password, confirmPassword);
     await createUserWithEmailAndPassword(email, password);
+
     await updateProfile({ displayName: name });
     if (updating) {
-      alert("Updated profile");
+      toast("Profile updated!");
     }
     // console.log(user);
   };
 
   const navigate = useNavigate();
-  if (user) {
+  if (token) {
     toast("Congratulations, sign up success!");
     navigate("/");
   }
